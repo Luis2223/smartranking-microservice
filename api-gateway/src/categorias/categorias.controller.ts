@@ -1,14 +1,17 @@
 import { Body, Controller, Get, Logger, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { ProxyClientProvider } from 'src/providers/proxy-client.provider';
+import { ClientProxySmartRanking } from 'src/proxyrmq/client-proxy';
 import { AtualizarCategoriaDto } from './dtos/atualizar-categoria.dto';
 import { CriarCategoriaDto } from './dtos/criar-categoria.dto';
 
 @Controller('api/v1')
 export class CategoriasController {
-  
-    private clientAdminBackend = new ProxyClientProvider().exec()
-    private logger = new Logger(CategoriasController.name);
+    
+    constructor(
+        private clientProxySmartRanking: ClientProxySmartRanking
+    ) {
+    }
+    private clientAdminBackend = this.clientProxySmartRanking.getClientProxyAdminBackendInstance()
 
     @Post('categorias')
     @UsePipes(ValidationPipe)

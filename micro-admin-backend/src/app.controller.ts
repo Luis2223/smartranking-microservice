@@ -1,7 +1,7 @@
 import { Controller, Logger } from '@nestjs/common';
 import { Ctx, EventPattern, MessagePattern, Payload, RmqContext } from '@nestjs/microservices';
 import { AppService } from './app.service';
-import { Categoria } from './interfaces/categorias/categoria.interface';
+import { Categoria } from './categorias/interface/categoria.interface';
 
 const ackErrors: String[] = ['E11000'] 
 
